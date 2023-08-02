@@ -2,7 +2,6 @@ package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
-
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.Servo;
@@ -15,62 +14,70 @@ public class Drive extends LinearOpMode {
 
     @Override
     public void runOpMode() {
-        DcMotor lfront = hardwareMap.dcMotor.get("Left front");
-        DcMotor rfront = hardwareMap.dcMotor.get("Right front");
-        DcMotor lback = hardwareMap.dcMotor.get("Left back");
-        DcMotor rback = hardwareMap.dcMotor.get("Right back");
+        DcMotor lFront = hardwareMap.dcMotor.get("Left front");
+        DcMotor rFront = hardwareMap.dcMotor.get("Right front");
+        DcMotor lBack = hardwareMap.dcMotor.get("Left back");
+        DcMotor rBack = hardwareMap.dcMotor.get("Right back");
         DcMotor arm = hardwareMap.dcMotor.get("arm");
 
         Servo lServo = hardwareMap.servo.get("lServo");
         Servo rServo = hardwareMap.servo.get("rServo");
 
 
-        lServo.setDirection(Servo.Direction.REVERSE);
 
         waitForStart();
 
-        rback.setDirection(DcMotorSimple.Direction.FORWARD);
-        lback.setDirection(DcMotorSimple.Direction.REVERSE);
-        rfront.setDirection(DcMotorSimple.Direction.FORWARD);
-        lfront.setDirection(DcMotorSimple.Direction.REVERSE);
+
+
+        lServo.setDirection(Servo.Direction.REVERSE);
+
+        rBack.setDirection(DcMotorSimple.Direction.FORWARD);
+        lBack.setDirection(DcMotorSimple.Direction.REVERSE);
+        rFront.setDirection(DcMotorSimple.Direction.FORWARD);
+        lFront.setDirection(DcMotorSimple.Direction.REVERSE);
         arm.setDirection(DcMotorSimple.Direction.REVERSE);
 
         while (opModeIsActive()) {
+
+
+
             //forward & backward
-            double forwardBackward = gamepad1.left_stick_y * -0.5;
-            /*lfront.setPower(gamepad1.left_stick_y*-0.5);
-            rfront.setPower(gamepad1.left_stick_y*-0.5);
-            lback.setPower(gamepad1.left_stick_y*-0.5);
-            rback.setPower(gamepad1.left_stick_y*-0.5);
+            double forwardBackward = gamepad1.left_stick_y * -0.25;
+            /*lFront.setPower(gamepad1.left_stick_y*-0.5);
+            rFront.setPower(gamepad1.left_stick_y*-0.5);
+            lBack.setPower(gamepad1.left_stick_y*-0.5);
+            rBack.setPower(gamepad1.left_stick_y*-0.5);
                */
             //turning
-            double turning = gamepad1.right_stick_x * 0.5;
-            /*lfront.setPower(gamepad1.right_stick_x*0.5);
-            rfront.setPower(gamepad1.right_stick_x*-0.5);
-            lback.setPower(gamepad1.right_stick_x*0.5);
-            rback.setPower(gamepad1.right_stick_x*-0.5);
+            double turning = gamepad1.right_stick_x * 0.25;
+            /*lFront.setPower(gamepad1.right_stick_x*0.5);
+            rFront.setPower(gamepad1.right_stick_x*-0.5);
+            lBack.setPower(gamepad1.right_stick_x*0.5);
+            rBack.setPower(gamepad1.right_stick_x*-0.5);
             */
             //mecanuming
-            double mecanuming = gamepad1.left_stick_x * 0.5;
+            double mecanuming = gamepad1.left_stick_x * 0.25;
 
             //arm up and down
-            double armPower = gamepad1.right_stick_y * -0.5;
+            double armPower = gamepad1.right_stick_y * -0.25;
             //Everything
-            lfront.setPower(forwardBackward + turning + mecanuming);
-            rfront.setPower(forwardBackward - turning - mecanuming);
-            lback.setPower(forwardBackward + turning - mecanuming);
-            rback.setPower(forwardBackward - turning + mecanuming);
+            lFront.setPower(forwardBackward + turning + mecanuming);
+            rFront.setPower(forwardBackward - turning - mecanuming);
+            lBack.setPower(forwardBackward + turning - mecanuming);
+            rBack.setPower(forwardBackward - turning + mecanuming);
             arm.setPower(armPower);
-        }
 
-        if (gamepad1.left_bumper) {
-            lServo.setPosition(1);
-            rServo.setPosition(1);
-        }
-        if (gamepad1.right_bumper) {
-            lServo.setPosition(0);
-            rServo.setPosition(0);
-        }
+            if (gamepad1.left_bumper) {
+                lServo.setPosition(1);
+                rServo.setPosition(1);
+            }
+            if (gamepad1.right_bumper) {
+                lServo.setPosition(0);
+                rServo.setPosition(0);
+            }
 
+
+
+        }
     }
 }
